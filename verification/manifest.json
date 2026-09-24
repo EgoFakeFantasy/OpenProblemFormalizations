@@ -1,13 +1,13 @@
 {
-  "checked_at_utc": "2026-09-24T11:32:15.1633975Z",
+  "checked_at_utc": "2026-09-24T11:52:12.3917498Z",
   "lean_toolchain": "leanprover/lean4:v4.30.0",
   "mathlib_revision": "c5ea00351c28e24afc9f0f84379aa41082b1188f",
   "build": "passed",
   "statement_checks": "passed",
   "axiom_audit": "passed",
-  "declarations": 38,
-  "theorem_constants": 27,
-  "library_modules": 5,
+  "declarations": 41,
+  "theorem_constants": 28,
+  "library_modules": 6,
   "permitted_axioms": [
     "propext",
     "Classical.choice",
@@ -18,32 +18,37 @@
   "module_coverage": "passed",
   "source_hashes": [
     {
-      "path": "Audit.lean",
-      "sha256": "2daf6fb8887340d20018db5021e7439c915dad7636cdf9b23d1dd2f3d89819e4"
+      "sha256": "5215407ee3b7e4532a97f30e8d052d29562aa4ed63184785749925f163712643",
+      "path": "Audit.lean"
     },
     {
-      "path": "Check.lean",
-      "sha256": "a6a10e9f2ac3e5defe96cea89229cded19ad9ff8293e4205251a59ad068210c7"
+      "sha256": "1c99be9ccab1fb426845863b8e3ebd89842fce11bf6d76c84f7479a7e22c8d08",
+      "path": "Check.lean"
     },
     {
-      "path": "OpenProblemFormalizations.lean",
-      "sha256": "ca30561efff3bbbe4c82aece7fea99ef62e23a90b4b3d1425f50bfc4bfe61f5c"
+      "sha256": "cb081ee1688c72868ee64ba6e857d5d32a0761c9aba5659ac5bcb8f4d69d4bdd",
+      "path": "OpenProblemFormalizations.lean"
     },
     {
-      "path": "OpenProblemFormalizations/IdealSpectra/CountableBoundary.lean",
-      "sha256": "6781e766416f7ad4adb5bf206ff6b9a0e0a5afec0e4324ebbd18bbfddbdd5f18"
+      "sha256": "6781e766416f7ad4adb5bf206ff6b9a0e0a5afec0e4324ebbd18bbfddbdd5f18",
+      "path": "OpenProblemFormalizations/IdealSpectra/CountableBoundary.lean"
     },
     {
-      "path": "OpenProblemFormalizations/IdealSpectra/Main.lean",
-      "sha256": "2102a7de74fbdcfbcc1cc93dc30379095958f855740ab6ebb8d094d9a4a6a825"
+      "sha256": "2102a7de74fbdcfbcc1cc93dc30379095958f855740ab6ebb8d094d9a4a6a825",
+      "path": "OpenProblemFormalizations/IdealSpectra/Main.lean"
     },
     {
-      "path": "OpenProblemFormalizations/IdealSpectra/RectangularIdeal.lean",
-      "sha256": "6abbaf792f146f6ef176483fd68eda9389407a085002c3d248a1ce55e6b33ad3"
+      "sha256": "6abbaf792f146f6ef176483fd68eda9389407a085002c3d248a1ce55e6b33ad3",
+      "path": "OpenProblemFormalizations/IdealSpectra/RectangularIdeal.lean"
     },
     {
-      "path": "OpenProblemFormalizations/IdealWebs/CountableLevels.lean",
-      "sha256": "33adbe2d8c3e7ce358f7b63db1cd738aa0f4b59b84c138027ac687cbea9fc061"
+      "sha256": "33adbe2d8c3e7ce358f7b63db1cd738aa0f4b59b84c138027ac687cbea9fc061",
+      "path": "OpenProblemFormalizations/IdealWebs/CountableLevels.lean"
+    },
+    {
+      "sha256": "3c27b7d1a3c78dabcdcdebbff6b5714f11c84ded5af50f259b0e2e7003cff42e",
+      "path": "OpenProblemFormalizations/IdealWebs/FiniteSelectors.lean"
     }
   ]
 }
+
