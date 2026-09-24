@@ -31,8 +31,14 @@ example {α : Type u} (I W : Set (Set α)) (F : ℕ → Set (Set α))
     ∃ n, W ⊆ F n :=
   seqWeb_subset_level I W F hmono hhered hcover hweb
 
+example {α : Type u} {β : Type*} (f : α → β)
+    (I : Set (Set β)) (W : Set (Set α))
+    (hweb : SeqWeb {a | f '' a ∈ I} W) :
+    SeqWeb I {b | ∃ a ∈ W, f '' a = b} :=
+  seqWeb_image_of_pullback f I W hweb
+
 #print axioms no_omega_omegaOne_ideal_representative
 #print axioms cofinal_subsequence_unbounded
 #print axioms seqWeb_subset_level
+#print axioms seqWeb_image_of_pullback
 end OpenProblemAcceptance
-
