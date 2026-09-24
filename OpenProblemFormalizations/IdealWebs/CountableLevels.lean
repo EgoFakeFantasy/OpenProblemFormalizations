@@ -51,5 +51,28 @@ theorem seqWeb_subset_level {α : Type u} (I W : Set (Set α))
   have hfm : f n ∈ F m := hhered m (f n) (⋃₀ (f '' a)) hsub hm
   exact hfnot n (hmono (Nat.le_of_lt hmn) hfm)
 
-end OpenProblemFormalizations.IdealWebs
+/-- The direct images of a sequence-web in a pulled-back ideal form a
+sequence-web in the original ideal. This is the combinatorial first step of
+the surjective-pullback web-closure argument. -/
+theorem seqWeb_image_of_pullback {α : Type u} {β : Type*}
+    (f : α → β) (I : Set (Set β)) (W : Set (Set α))
+    (hweb : SeqWeb {a | f '' a ∈ I} W) :
+    SeqWeb I {b | ∃ a ∈ W, f '' a = b} := by
+  classical
+  intro g hg
+  choose a ha heq using hg
+  obtain ⟨s, hs, hbound⟩ := hweb a ha
+  refine ⟨s, hs, ?_⟩
+  have hEq : (⋃₀ (g '' s)) = f '' (⋃₀ (a '' s)) := by
+    ext y
+    constructor
+    · rintro ⟨b, ⟨n, hn, rfl⟩, hy⟩
+      rw [← heq n] at hy
+      obtain ⟨x, hx, rfl⟩ := hy
+      exact ⟨x, ⟨a n, ⟨n, hn, rfl⟩, hx⟩, rfl⟩
+    · rintro ⟨x, ⟨b, ⟨n, hn, rfl⟩, hx⟩, rfl⟩
+      exact ⟨g n, ⟨n, hn, rfl⟩, (heq n ▸ ⟨x, hx, rfl⟩)⟩
+  rw [hEq]
+  exact hbound
 
+end OpenProblemFormalizations.IdealWebs
