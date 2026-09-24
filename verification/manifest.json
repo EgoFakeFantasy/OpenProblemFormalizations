@@ -1,0 +1,45 @@
+{
+  "checked_at_utc": "2026-09-24T07:33:50.1072166Z",
+  "lean_toolchain": "leanprover/lean4:v4.30.0",
+  "mathlib_revision": "c5ea00351c28e24afc9f0f84379aa41082b1188f",
+  "build": "passed",
+  "statement_checks": "passed",
+  "axiom_audit": "passed",
+  "declarations": 35,
+  "theorem_constants": 25,
+  "library_modules": 4,
+  "permitted_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "forbidden_construct_scan": "passed",
+  "whitespace_scan": "passed",
+  "module_coverage": "passed",
+  "source_hashes": [
+    {
+      "sha256": "9a6b0a0641407f70424d5afc985fb7dceb235daaf51ca9138a6623ae0ffbe430",
+      "path": "Audit.lean"
+    },
+    {
+      "sha256": "db59f53f3362750f408be663365995781491055b926507fd2b94a507065f73d8",
+      "path": "Check.lean"
+    },
+    {
+      "sha256": "5f79b3eb959573d92986bcc31e987d7ae324e2ec0cb8be30f5237febd3b5fd7b",
+      "path": "OpenProblemFormalizations.lean"
+    },
+    {
+      "sha256": "6781e766416f7ad4adb5bf206ff6b9a0e0a5afec0e4324ebbd18bbfddbdd5f18",
+      "path": "OpenProblemFormalizations/IdealSpectra/CountableBoundary.lean"
+    },
+    {
+      "sha256": "2102a7de74fbdcfbcc1cc93dc30379095958f855740ab6ebb8d094d9a4a6a825",
+      "path": "OpenProblemFormalizations/IdealSpectra/Main.lean"
+    },
+    {
+      "sha256": "6abbaf792f146f6ef176483fd68eda9389407a085002c3d248a1ce55e6b33ad3",
+      "path": "OpenProblemFormalizations/IdealSpectra/RectangularIdeal.lean"
+    }
+  ]
+}

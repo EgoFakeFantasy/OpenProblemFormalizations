@@ -1,0 +1,2 @@
+import OpenProblemFormalizations.IdealSpectra.RectangularIdeal
+import OpenProblemFormalizations.IdealSpectra.CountableBoundary
