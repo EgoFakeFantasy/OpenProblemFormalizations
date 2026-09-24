@@ -37,8 +37,18 @@ example {α : Type u} {β : Type*} (f : α → β)
     SeqWeb I {b | ∃ a ∈ W, f '' a = b} :=
   seqWeb_image_of_pullback f I W hweb
 
+example {α : Type u} (I : Set (Set α)) (S D : ℕ → Set α)
+    (hdown : ∀ x y : Set α, x ⊆ y → y ∈ I → x ∈ I)
+    (hunion : ∀ x y : Set α, x ∈ I → y ∈ I → x ∪ y ∈ I)
+    (hsun : SeqSun I S) (hthin : FiniteSelectorThin I S)
+    (hD : ∀ n, D n ⊆ S n ∧ (D n).Finite) :
+    SeqSun I (fun n => S n \ D n) :=
+  seqSun_diff_finite I S D hdown hunion hsun hthin hD
+
 #print axioms no_omega_omegaOne_ideal_representative
 #print axioms cofinal_subsequence_unbounded
 #print axioms seqWeb_subset_level
 #print axioms seqWeb_image_of_pullback
+#print axioms seqSun_diff_finite
 end OpenProblemAcceptance
+
