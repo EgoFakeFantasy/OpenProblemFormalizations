@@ -7,7 +7,9 @@
 | 项目 | 来源 | 已核验范围 | 未完成或待外部核验 |
 | --- | --- | --- | --- |
 | [IdealSpectra](OpenProblemFormalizations/IdealSpectra/README.md) | Benhamou, *Scales in the Point Spectrum*, arXiv:2603.00305v1, Questions 3.17–3.18 | N02 的三测试对象反证及理想性质；N04 的可数边界引理 | N04 的一般问题、N02 的文献优先权及外部评审 |
+| [IdealWebs](OpenProblemFormalizations/IdealWebs/CountableLevels.lean) | Hernández-Hernández–Hrušák–Rivas-González, *The bounded topology*, Conjecture 4.14 | Fσ 理想的递增遗传层覆盖中，序列 web 必包含于一个层的通用引理 | E05 的一般二分法；flat 理想推论仍为纸笔审计，未形式化 |
 
 依赖 Lean 4.30.0 与 mathlib4 v4.30.0。运行 `lake build`、`lake env lean Check.lean`、`lake env lean Audit.lean` 或 `./verify.ps1`。检查结果见 [verification/manifest.json](verification/manifest.json)。
 
 本仓库不依赖 `InfinitaryCombinatorics` 项目；其中的 R0/A1 留在无穷组合仓库。
+
