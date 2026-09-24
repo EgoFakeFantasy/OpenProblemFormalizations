@@ -30,4 +30,3 @@ run_elab do
         unless used.contains ax do used := used.push ax
   unless theorems > 0 do throwError "No project theorem declarations were audited"
   logInfo m!"Kernel audit passed: {declarations} declarations, {theorems} theorem constants; axioms: {used}"
-
