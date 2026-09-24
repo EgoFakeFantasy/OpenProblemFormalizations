@@ -3,6 +3,7 @@ import OpenProblemFormalizations
 namespace OpenProblemAcceptance
 open OpenProblemFormalizations.IdealSpectra.CohesiveIdeal
 open OpenProblemFormalizations.IdealSpectra.EnhancedTukeyOmega
+open OpenProblemFormalizations.IdealWebs
 
 universe u
 
@@ -22,6 +23,16 @@ example {P : Type u} [Preorder P]
     ∃ f : ℕ → P, ∀ a : Set ℕ, IsCofinal a → ¬ BddAbove (f '' a) :=
   cofinal_subsequence_unbounded hdir s hs
 
+example {α : Type u} (I W : Set (Set α)) (F : ℕ → Set (Set α))
+    (hmono : Monotone F)
+    (hhered : ∀ (n : ℕ) (a b : Set α), a ⊆ b → b ∈ F n → a ∈ F n)
+    (hcover : ∀ a ∈ I, ∃ n, a ∈ F n)
+    (hweb : SeqWeb I W) :
+    ∃ n, W ⊆ F n :=
+  seqWeb_subset_level I W F hmono hhered hcover hweb
+
 #print axioms no_omega_omegaOne_ideal_representative
 #print axioms cofinal_subsequence_unbounded
+#print axioms seqWeb_subset_level
 end OpenProblemAcceptance
+
