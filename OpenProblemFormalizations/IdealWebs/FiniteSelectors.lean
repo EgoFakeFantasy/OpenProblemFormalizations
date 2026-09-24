@@ -50,4 +50,3 @@ theorem seqSun_diff_finite {α : Type u} (I : Set (Set α))
   · exact Or.inl ⟨S n \ D n, ⟨n, hn, rfl⟩, ⟨hxn, hxd⟩⟩
 
 end OpenProblemFormalizations.IdealWebs
-
