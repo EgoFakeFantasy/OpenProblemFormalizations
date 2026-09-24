@@ -8,7 +8,8 @@ run_elab do
     `OpenProblemFormalizations.IdealSpectra.CohesiveIdeal.no_omega_omegaOne_ideal_representative,
     `OpenProblemFormalizations.IdealSpectra.CohesiveIdeal.noncofinalIdeal_union,
     `OpenProblemFormalizations.IdealSpectra.CohesiveIdeal.omegaOne_cofinal_fiber,
-    `OpenProblemFormalizations.IdealSpectra.EnhancedTukeyOmega.cofinal_subsequence_unbounded]
+    `OpenProblemFormalizations.IdealSpectra.EnhancedTukeyOmega.cofinal_subsequence_unbounded,
+    `OpenProblemFormalizations.IdealWebs.seqWeb_subset_level]
   for name in required do
     unless env.contains name do
       throwError "Required declaration missing: {name}"
@@ -27,3 +28,4 @@ run_elab do
         unless used.contains ax do used := used.push ax
   unless theorems > 0 do throwError "No project theorem declarations were audited"
   logInfo m!"Kernel audit passed: {declarations} declarations, {theorems} theorem constants; axioms: {used}"
+
