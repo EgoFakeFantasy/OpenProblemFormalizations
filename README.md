@@ -13,4 +13,3 @@
 
 本仓库不依赖 `InfinitaryCombinatorics` 项目；其中的 R0/A1 留在无穷组合仓库。
 
-
