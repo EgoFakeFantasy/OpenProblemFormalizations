@@ -1,4 +1,5 @@
 import OpenProblemFormalizations.IdealWebs.FiniteSelectors
+import OpenProblemFormalizations.IdealWebs.CountableLevels
 
 /-!
 The elementary set-theoretic skeleton of the crossing construction used in
@@ -115,5 +116,57 @@ theorem infiniteRows_finite_of_crossingBounded {rho : Set ℕ → ℕ}
   obtain ⟨m, hm⟩ := hunb (infiniteRows a) hinf' C
   have hle := hrho (infiniteRows_initial_subset_crossingRows m a)
   exact Nat.not_lt_of_ge (hle.trans (hC m)) hm
+
+/-- One complete row of the crossing grid. -/
+def fullRow (n : ℕ) : Set (ℕ × ℕ) := completeRows {n}
+
+theorem fullRow_crossingBounded {rho : Set ℕ → ℕ}
+    (hrho : Monotone rho) (n : ℕ) :
+    crossingBounded rho (fullRow n) := by
+  refine ⟨rho {n}, ?_⟩
+  intro m
+  rw [fullRow, crossingRows_completeRows]
+  exact hrho Set.inter_subset_left
+
+theorem sUnion_fullRow_image (s : Set ℕ) :
+    ⋃₀ (fullRow '' s) = completeRows s := by
+  ext p
+  simp [fullRow, completeRows]
+
+/-- Complete rows give a countable sun for any row gauge that diverges on
+every infinite set of row indices. -/
+theorem fullRows_seqSun {rho : Set ℕ → ℕ}
+    (hunb : ∀ s : Set ℕ, s.Infinite → ∀ C, ∃ m, C < rho (s ∩ Set.Iic m)) :
+    SeqSun {a | crossingBounded rho a} fullRow := by
+  intro s hs
+  rw [sUnion_fullRow_image]
+  exact completeRows_not_crossingBounded hunb hs
+
+/-- A finite-coordinate formulation of being in the Cantor closure of `w`.
+The equivalence with topological closure is not used in this module. -/
+def FiniteCoordinateApprox {α : Type*} (w : Set (Set α)) (a : Set α) : Prop :=
+  ∀ f : Finset α, ∃ b ∈ w, ∀ x ∈ f, (x ∈ b ↔ x ∈ a)
+
+/-- Finite sets lying in one complete row. -/
+def finiteRowFamily : Set (Set (ℕ × ℕ)) :=
+  {a | a.Finite ∧ ∃ n, a ⊆ fullRow n}
+
+theorem fullRow_finiteCoordinateApprox (n : ℕ) :
+    FiniteCoordinateApprox finiteRowFamily (fullRow n) := by
+  intro f
+  refine ⟨fullRow n ∩ (f : Set (ℕ × ℕ)), ?_, ?_⟩
+  · constructor
+    · exact f.finite_toSet.subset (by intro x hx; exact hx.2)
+    · exact ⟨n, Set.inter_subset_left⟩
+  · intro x hx
+    simp [hx]
+
+theorem finiteCoordinateClosure_not_seqWeb {rho : Set ℕ → ℕ}
+    (hunb : ∀ s : Set ℕ, s.Infinite → ∀ C, ∃ m, C < rho (s ∩ Set.Iic m)) :
+    ¬ SeqWeb {a | crossingBounded rho a}
+      {a | FiniteCoordinateApprox finiteRowFamily a} := by
+  intro hweb
+  obtain ⟨s, hs, hbounded⟩ := hweb fullRow fullRow_finiteCoordinateApprox
+  exact (fullRows_seqSun hunb) s hs hbounded
 
 end OpenProblemFormalizations.IdealWebs

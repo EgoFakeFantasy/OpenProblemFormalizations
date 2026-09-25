@@ -59,6 +59,9 @@ example {α : Type u} (I : Set (Set α)) (S D : ℕ → Set α)
 #print axioms OpenProblemFormalizations.IdealWebs.crossingBounded_union
 #print axioms OpenProblemFormalizations.IdealWebs.completeRows_not_crossingBounded
 #print axioms OpenProblemFormalizations.IdealWebs.infiniteRows_finite_of_crossingBounded
+#print axioms OpenProblemFormalizations.IdealWebs.fullRows_seqSun
+#print axioms OpenProblemFormalizations.IdealWebs.fullRow_finiteCoordinateApprox
+#print axioms OpenProblemFormalizations.IdealWebs.finiteCoordinateClosure_not_seqWeb
 #print axioms OpenProblemFormalizations.CohenCoherence.cofinal_iUnion_index
 #print axioms OpenProblemFormalizations.CohenCoherence.countable_graph_cover_cofinal_stars
 end OpenProblemAcceptance
