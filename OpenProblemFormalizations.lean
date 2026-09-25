@@ -3,3 +3,4 @@ import OpenProblemFormalizations.IdealWebs.CountableLevels
 import OpenProblemFormalizations.IdealWebs.FiniteSelectors
 import OpenProblemFormalizations.IdealWebs.SelectorIdeals
 import OpenProblemFormalizations.IdealWebs.FiniteBlockSun
+import OpenProblemFormalizations.CohenCoherence.CofinalGraphCover

@@ -16,7 +16,9 @@ run_elab do
     `OpenProblemFormalizations.IdealWebs.selectorIdeal_tall,
     `OpenProblemFormalizations.IdealWebs.selectorIdeal_eventually_mono,
     `OpenProblemFormalizations.IdealWebs.selectorIdeal_countable_lower,
-    `OpenProblemFormalizations.IdealWebs.seqSun_finite_block]
+    `OpenProblemFormalizations.IdealWebs.seqSun_finite_block,
+    `OpenProblemFormalizations.CohenCoherence.cofinal_iUnion_index,
+    `OpenProblemFormalizations.CohenCoherence.countable_graph_cover_cofinal_stars]
   for name in required do
     unless env.contains name do
       throwError "Required declaration missing: {name}"

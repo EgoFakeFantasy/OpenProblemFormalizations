@@ -55,4 +55,6 @@ example {α : Type u} (I : Set (Set α)) (S D : ℕ → Set α)
 #print axioms selectorIdeal_eventually_mono
 #print axioms selectorIdeal_countable_lower
 #print axioms seqSun_finite_block
+#print axioms OpenProblemFormalizations.CohenCoherence.cofinal_iUnion_index
+#print axioms OpenProblemFormalizations.CohenCoherence.countable_graph_cover_cofinal_stars
 end OpenProblemAcceptance
