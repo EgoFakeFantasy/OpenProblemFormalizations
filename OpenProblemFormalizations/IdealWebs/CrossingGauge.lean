@@ -85,4 +85,35 @@ theorem completeRows_not_crossingBounded {rho : Set ℕ → ℕ}
     simpa [crossingRows_completeRows] using hC m
   exact Nat.not_lt_of_ge hCm hm
 
+/-- Rows on which a set has infinitely many points. -/
+def infiniteRows (a : Set (ℕ × ℕ)) : Set ℕ :=
+  {n | {t : ℕ | (n, t) ∈ a}.Infinite}
+
+/-- Every infinite row is active at every time after its row index. -/
+theorem infiniteRows_initial_subset_crossingRows (m : ℕ) (a : Set (ℕ × ℕ)) :
+    infiniteRows a ∩ Set.Iic m ⊆ crossingRows m a := by
+  intro n hn
+  obtain ⟨hrow, hnm⟩ := hn
+  have htail : ∃ t, m ≤ t ∧ (n, t) ∈ a := by
+    by_contra h
+    have hsubset : {t : ℕ | (n, t) ∈ a} ⊆ Set.Iic m := by
+      intro t ht
+      exact Nat.le_of_lt (Nat.lt_of_not_ge (fun hmt => h ⟨t, hmt, ht⟩))
+    exact hrow ((finite_le_nat m).subset hsubset)
+  exact ⟨hnm, htail⟩
+
+/-- A bounded crossing set has only finitely many infinite rows whenever
+the row gauge is unbounded on each infinite set. -/
+theorem infiniteRows_finite_of_crossingBounded {rho : Set ℕ → ℕ}
+    (hrho : Monotone rho)
+    (hunb : ∀ s : Set ℕ, s.Infinite → ∀ C, ∃ m, C < rho (s ∩ Set.Iic m))
+    {a : Set (ℕ × ℕ)} (ha : crossingBounded rho a) :
+    (infiniteRows a).Finite := by
+  by_contra hinf
+  have hinf' : (infiniteRows a).Infinite := hinf
+  obtain ⟨C, hC⟩ := ha
+  obtain ⟨m, hm⟩ := hunb (infiniteRows a) hinf' C
+  have hle := hrho (infiniteRows_initial_subset_crossingRows m a)
+  exact Nat.not_lt_of_ge (hle.trans (hC m)) hm
+
 end OpenProblemFormalizations.IdealWebs

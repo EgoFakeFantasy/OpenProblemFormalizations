@@ -1,12 +1,12 @@
 {
-  "checked_at_utc": "2026-09-25T06:56:19.8657638Z",
+  "checked_at_utc": "2026-09-25T07:30:12.6125802Z",
   "lean_toolchain": "leanprover/lean4:v4.30.0",
   "mathlib_revision": "c5ea00351c28e24afc9f0f84379aa41082b1188f",
   "build": "passed",
   "statement_checks": "passed",
   "axiom_audit": "passed",
-  "declarations": 80,
-  "theorem_constants": 56,
+  "declarations": 83,
+  "theorem_constants": 58,
   "library_modules": 10,
   "permitted_axioms": [
     "propext",
@@ -19,11 +19,11 @@
   "source_hashes": [
     {
       "path": "Audit.lean",
-      "sha256": "f7e475990516a3efd9494c1ad42fb40cdf0a82dd48b9ccc4769bdb1fb0842d49"
+      "sha256": "2ca83b2f4c90aa5ab6bc630e47d2ebba635818ddc9d273aa38e916da35ddca7b"
     },
     {
       "path": "Check.lean",
-      "sha256": "5de740e5404cced70dad920010faab3ac0afdfc62d5426e34df4e3a9d9a98e48"
+      "sha256": "ffc5c84b29f47cb3245021df4763af4a42ad3f4434c1e55f3bb730297100fbd6"
     },
     {
       "path": "OpenProblemFormalizations.lean",
@@ -51,7 +51,7 @@
     },
     {
       "path": "OpenProblemFormalizations/IdealWebs/CrossingGauge.lean",
-      "sha256": "bdaee167dfc9c90c9527c1eb15112ae84d07e26be7d9885c3b86e8ca7b6e8f83"
+      "sha256": "17e24d7bef483ef4f0451cea73b1052571be60f965479ca1756d25223b2adb5a"
     },
     {
       "path": "OpenProblemFormalizations/IdealWebs/FiniteBlockSun.lean",

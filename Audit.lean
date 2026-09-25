@@ -20,6 +20,7 @@ run_elab do
     `OpenProblemFormalizations.IdealWebs.crossingRows_completeRows,
     `OpenProblemFormalizations.IdealWebs.crossingBounded_union,
     `OpenProblemFormalizations.IdealWebs.completeRows_not_crossingBounded,
+    `OpenProblemFormalizations.IdealWebs.infiniteRows_finite_of_crossingBounded,
     `OpenProblemFormalizations.CohenCoherence.cofinal_iUnion_index,
     `OpenProblemFormalizations.CohenCoherence.countable_graph_cover_cofinal_stars]
   for name in required do
