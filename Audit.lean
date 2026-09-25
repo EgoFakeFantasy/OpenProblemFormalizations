@@ -11,7 +11,8 @@ run_elab do
     `OpenProblemFormalizations.IdealSpectra.EnhancedTukeyOmega.cofinal_subsequence_unbounded,
     `OpenProblemFormalizations.IdealWebs.seqWeb_subset_level,
     `OpenProblemFormalizations.IdealWebs.seqWeb_image_of_pullback,
-    `OpenProblemFormalizations.IdealWebs.seqSun_diff_finite]
+    `OpenProblemFormalizations.IdealWebs.seqSun_diff_finite,
+    `OpenProblemFormalizations.IdealWebs.seqSun_finite_block]
   for name in required do
     unless env.contains name do
       throwError "Required declaration missing: {name}"

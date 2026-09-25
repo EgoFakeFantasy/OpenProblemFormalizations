@@ -50,4 +50,5 @@ example {α : Type u} (I : Set (Set α)) (S D : ℕ → Set α)
 #print axioms seqWeb_subset_level
 #print axioms seqWeb_image_of_pullback
 #print axioms seqSun_diff_finite
+#print axioms seqSun_finite_block
 end OpenProblemAcceptance

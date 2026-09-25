@@ -1,13 +1,13 @@
 {
-  "checked_at_utc": "2026-09-24T11:52:12.3917498Z",
+  "checked_at_utc": "2026-09-25T05:08:04.7542640Z",
   "lean_toolchain": "leanprover/lean4:v4.30.0",
   "mathlib_revision": "c5ea00351c28e24afc9f0f84379aa41082b1188f",
   "build": "passed",
   "statement_checks": "passed",
   "axiom_audit": "passed",
-  "declarations": 41,
-  "theorem_constants": 28,
-  "library_modules": 6,
+  "declarations": 53,
+  "theorem_constants": 34,
+  "library_modules": 7,
   "permitted_axioms": [
     "propext",
     "Classical.choice",
@@ -18,15 +18,15 @@
   "module_coverage": "passed",
   "source_hashes": [
     {
-      "sha256": "5215407ee3b7e4532a97f30e8d052d29562aa4ed63184785749925f163712643",
+      "sha256": "b506f8b0a3463fef72de70ba603e95dc23f832be81d8492952501f858e63fe07",
       "path": "Audit.lean"
     },
     {
-      "sha256": "1c99be9ccab1fb426845863b8e3ebd89842fce11bf6d76c84f7479a7e22c8d08",
+      "sha256": "ebe4491c753bb73c32e8bf3450c7c11a4b6d4ce7e1df0cc36b988fe352c1bdea",
       "path": "Check.lean"
     },
     {
-      "sha256": "cb081ee1688c72868ee64ba6e857d5d32a0761c9aba5659ac5bcb8f4d69d4bdd",
+      "sha256": "8df37ad17c20c1667435a9631a78622889d9b7de26bd7d8e4e882096c8a141e3",
       "path": "OpenProblemFormalizations.lean"
     },
     {
@@ -42,11 +42,15 @@
       "path": "OpenProblemFormalizations/IdealSpectra/RectangularIdeal.lean"
     },
     {
-      "sha256": "33adbe2d8c3e7ce358f7b63db1cd738aa0f4b59b84c138027ac687cbea9fc061",
+      "sha256": "85b305994a32eff7246e6f01741e1602c36da4f2df02434c1db826f2e3e5e3c3",
       "path": "OpenProblemFormalizations/IdealWebs/CountableLevels.lean"
     },
     {
-      "sha256": "3c27b7d1a3c78dabcdcdebbff6b5714f11c84ded5af50f259b0e2e7003cff42e",
+      "sha256": "fa8ba7c69e7664cb6ccd74d8f22cd066e3c5d3a1940f9a577665400849f0afa0",
+      "path": "OpenProblemFormalizations/IdealWebs/FiniteBlockSun.lean"
+    },
+    {
+      "sha256": "5021874ec0879a859fdbc1049282413f5c6f8e68e842ce2a6b9cdff8db9d20e7",
       "path": "OpenProblemFormalizations/IdealWebs/FiniteSelectors.lean"
     }
   ]
