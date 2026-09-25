@@ -12,6 +12,10 @@ run_elab do
     `OpenProblemFormalizations.IdealWebs.seqWeb_subset_level,
     `OpenProblemFormalizations.IdealWebs.seqWeb_image_of_pullback,
     `OpenProblemFormalizations.IdealWebs.seqSun_diff_finite,
+    `OpenProblemFormalizations.IdealWebs.selectorIdeal_union,
+    `OpenProblemFormalizations.IdealWebs.selectorIdeal_tall,
+    `OpenProblemFormalizations.IdealWebs.selectorIdeal_eventually_mono,
+    `OpenProblemFormalizations.IdealWebs.selectorIdeal_countable_lower,
     `OpenProblemFormalizations.IdealWebs.seqSun_finite_block]
   for name in required do
     unless env.contains name do

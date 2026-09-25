@@ -1,4 +1,5 @@
 import OpenProblemFormalizations.IdealSpectra.Main
 import OpenProblemFormalizations.IdealWebs.CountableLevels
 import OpenProblemFormalizations.IdealWebs.FiniteSelectors
+import OpenProblemFormalizations.IdealWebs.SelectorIdeals
 import OpenProblemFormalizations.IdealWebs.FiniteBlockSun
