@@ -24,6 +24,7 @@ run_elab do
     `OpenProblemFormalizations.IdealWebs.fullRows_seqSun,
     `OpenProblemFormalizations.IdealWebs.fullRow_finiteCoordinateApprox,
     `OpenProblemFormalizations.IdealWebs.finiteCoordinateClosure_not_seqWeb,
+    `OpenProblemFormalizations.IdealWebs.finiteRowFamily_seqWeb,
     `OpenProblemFormalizations.CohenCoherence.cofinal_iUnion_index,
     `OpenProblemFormalizations.CohenCoherence.countable_graph_cover_cofinal_stars]
   for name in required do

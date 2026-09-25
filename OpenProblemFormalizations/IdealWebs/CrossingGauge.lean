@@ -1,5 +1,7 @@
 import OpenProblemFormalizations.IdealWebs.FiniteSelectors
 import OpenProblemFormalizations.IdealWebs.CountableLevels
+import Mathlib.Data.Set.Finite.Lattice
+import Mathlib.Order.Interval.Set.Infinite
 
 /-!
 The elementary set-theoretic skeleton of the crossing construction used in
@@ -168,5 +170,141 @@ theorem finiteCoordinateClosure_not_seqWeb {rho : Set ℕ → ℕ}
   intro hweb
   obtain ⟨s, hs, hbounded⟩ := hweb fullRow fullRow_finiteCoordinateApprox
   exact (fullRows_seqSun hunb) s hs hbounded
+
+/-- A sequence of single-row sets whose later rows start beyond every point
+of each earlier set has at most one active row at each time. -/
+theorem separatedRows_crossingRows_subsingleton
+    (a : ℕ → Set (ℕ × ℕ)) (r : ℕ → ℕ)
+    (hrow : ∀ i, a i ⊆ fullRow (r i))
+    (hsep : ∀ i j, i < j → ∀ t, (r i, t) ∈ a i → t < r j)
+    (m : ℕ) :
+    (crossingRows m (⋃ i, a i)).Subsingleton := by
+  intro n hn n' hn'
+  obtain ⟨hnm, t, hmt, ht⟩ := hn
+  obtain ⟨hnm', t', hmt', ht'⟩ := hn'
+  obtain ⟨i, hi⟩ := Set.mem_iUnion.mp ht
+  obtain ⟨j, hj⟩ := Set.mem_iUnion.mp ht'
+  have hni : n = r i := by
+    have h := hrow i hi
+    simpa [fullRow, completeRows] using h
+  have hnj : n' = r j := by
+    have h := hrow j hj
+    simpa [fullRow, completeRows] using h
+  rcases lt_trichotomy i j with hij | hij | hji
+  · have hlt : t < r j := hsep i j hij t (hni ▸ hi)
+    omega
+  · subst j
+    omega
+  · have hlt : t' < r i := hsep j i hji t' (hnj ▸ hj)
+    omega
+
+/-- The time-separated branch of the finite-row web thinning argument. -/
+theorem separatedRows_crossingBounded {rho : Set ℕ → ℕ} (hrho : Monotone rho)
+    (C : ℕ) (hunit : ∀ n, rho {n} ≤ C)
+    (a : ℕ → Set (ℕ × ℕ)) (r : ℕ → ℕ)
+    (hrow : ∀ i, a i ⊆ fullRow (r i))
+    (hsep : ∀ i j, i < j → ∀ t, (r i, t) ∈ a i → t < r j) :
+    crossingBounded rho (⋃ i, a i) := by
+  refine ⟨C, ?_⟩
+  intro m
+  have hsingle := separatedRows_crossingRows_subsingleton a r hrow hsep m
+  by_cases hne : (crossingRows m (⋃ i, a i)).Nonempty
+  · obtain ⟨n, hn⟩ := hne
+    have hsub : crossingRows m (⋃ i, a i) ⊆ {n} := by
+      intro x hx
+      exact Set.mem_singleton_iff.mpr (hsingle hx hn)
+    exact (hrho hsub).trans (hunit n)
+  · have hsub : crossingRows m (⋃ i, a i) ⊆ {0} := by
+      intro x hx
+      exact (hne ⟨x, hx⟩).elim
+    exact (hrho hsub).trans (hunit 0)
+
+/-- A sequence with finite fibers eventually has an arbitrarily large row
+beyond any prescribed index. -/
+theorem finiteFibers_exists_later_row (r : ℕ → ℕ)
+    (hfinite : ∀ n, (r ⁻¹' {n}).Finite) (k B : ℕ) :
+    ∃ i, k < i ∧ B < r i := by
+  by_contra h
+  have hsmall : (r ⁻¹' Set.Iic B).Finite :=
+    (finite_le_nat B).preimage' (fun n _ => hfinite n)
+  have hsub : Set.Ici (k + 1) ⊆ r ⁻¹' Set.Iic B := by
+    intro i hi
+    change k + 1 ≤ i at hi
+    change r i ≤ B
+    apply Nat.le_of_not_gt
+    intro hgt
+    exact h ⟨i, by omega, hgt⟩
+  exact (Set.Ici_infinite (k + 1)) (hsmall.subset hsub)
+
+theorem finiteSet_second_bounded (a : Set (ℕ × ℕ)) (ha : a.Finite) :
+    ∃ B : ℕ, ∀ p ∈ a, p.2 ≤ B := by
+  classical
+  let f := ha.toFinset
+  refine ⟨f.sup (fun p => p.2), ?_⟩
+  intro p hp
+  exact Finset.le_sup (ha.mem_toFinset.mpr hp)
+
+/-- The row-finite case of the web thinning: pass to a sequence whose row
+indices begin strictly beyond every earlier selected time coordinate. -/
+theorem finiteFibers_separated_subsequence
+    (f : ℕ → Set (ℕ × ℕ)) (r : ℕ → ℕ)
+    (hfinite : ∀ i, (f i).Finite)
+    (hfinfib : ∀ n, (r ⁻¹' {n}).Finite) :
+    ∃ s : ℕ → ℕ, StrictMono s ∧
+      ∀ i j, i < j → ∀ t, (r (s i), t) ∈ f (s i) → t < r (s j) := by
+  classical
+  choose B hB using fun i => finiteSet_second_bounded (f i) (hfinite i)
+  let step : ℕ → ℕ := fun i =>
+    Classical.choose (finiteFibers_exists_later_row r hfinfib i (max (r i) (B i)))
+  have hstep (i : ℕ) : i < step i ∧ max (r i) (B i) < r (step i) := by
+    exact Classical.choose_spec (finiteFibers_exists_later_row r hfinfib i _)
+  let s : ℕ → ℕ := fun k => Nat.rec (step 0) (fun _ i => step i) k
+  have hs (k : ℕ) : s (k + 1) = step (s k) := rfl
+  have hsmono : StrictMono s := strictMono_nat_of_lt_succ (fun k => by
+    rw [hs]
+    exact (hstep (s k)).1)
+  have hrmono : StrictMono (fun k => r (s k)) := strictMono_nat_of_lt_succ (fun k => by
+    rw [hs]
+    exact lt_of_le_of_lt (le_max_left _ _) (hstep (s k)).2)
+  refine ⟨s, hsmono, ?_⟩
+  intro i j hij t ht
+  have hbt : t ≤ B (s i) := hB (s i) (r (s i), t) ht
+  have hnext : max (r (s i)) (B (s i)) < r (s (i + 1)) := by
+    rw [hs]
+    exact (hstep (s i)).2
+  have hle : r (s (i + 1)) ≤ r (s j) :=
+    hrmono.monotone (Nat.succ_le_iff.mpr hij)
+  omega
+
+/-- The finite single-row family really is a sequence-web whenever singleton
+row gauges have one common bound. This is the missing web half of the crossing
+counterexample's elementary combinatorial skeleton. -/
+theorem finiteRowFamily_seqWeb {rho : Set ℕ → ℕ} (hrho : Monotone rho)
+    (C : ℕ) (hunit : ∀ n, rho {n} ≤ C) :
+    SeqWeb {a | crossingBounded rho a} finiteRowFamily := by
+  classical
+  intro f hf
+  have hfinite (i : ℕ) : (f i).Finite := (hf i).1
+  choose r hr using fun i => (hf i).2
+  by_cases hsame : ∃ n, (r ⁻¹' {n}).Infinite
+  · obtain ⟨n, hn⟩ := hsame
+    refine ⟨r ⁻¹' {n}, hn, ?_⟩
+    apply crossingBounded_mono hrho ?_ (fullRow_crossingBounded hrho n)
+    intro p hp
+    obtain ⟨b, ⟨i, hi, rfl⟩, hpb⟩ := hp
+    change r i = n at hi
+    simpa [hi] using (hr i hpb)
+  · have hfinfib (n : ℕ) : (r ⁻¹' {n}).Finite := by
+      by_contra h
+      exact hsame ⟨n, h⟩
+    obtain ⟨s, hsmono, hsep⟩ :=
+      finiteFibers_separated_subsequence f r hfinite hfinfib
+    refine ⟨Set.range s, Set.infinite_range_of_injective hsmono.injective, ?_⟩
+    have hEq : ⋃₀ (f '' Set.range s) = ⋃ k, f (s k) := by
+      ext p
+      simp
+    rw [hEq]
+    exact separatedRows_crossingBounded hrho C hunit
+      (fun k => f (s k)) (fun k => r (s k)) (fun k => hr (s k)) hsep
 
 end OpenProblemFormalizations.IdealWebs
