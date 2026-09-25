@@ -1,13 +1,13 @@
 {
-  "checked_at_utc": "2026-09-25T06:23:29.5381549Z",
+  "checked_at_utc": "2026-09-25T06:56:19.8657638Z",
   "lean_toolchain": "leanprover/lean4:v4.30.0",
   "mathlib_revision": "c5ea00351c28e24afc9f0f84379aa41082b1188f",
   "build": "passed",
   "statement_checks": "passed",
   "axiom_audit": "passed",
-  "declarations": 66,
-  "theorem_constants": 45,
-  "library_modules": 9,
+  "declarations": 80,
+  "theorem_constants": 56,
+  "library_modules": 10,
   "permitted_axioms": [
     "propext",
     "Classical.choice",
@@ -19,15 +19,15 @@
   "source_hashes": [
     {
       "path": "Audit.lean",
-      "sha256": "dcedcb403d543234ddf0cf5676e8d9079ad8490702a4794ee4b73dd940351098"
+      "sha256": "f7e475990516a3efd9494c1ad42fb40cdf0a82dd48b9ccc4769bdb1fb0842d49"
     },
     {
       "path": "Check.lean",
-      "sha256": "bc50d0fe7fd2511182575237ce6951ccf5899cd6eb95d8bb63792e0d3a7d8345"
+      "sha256": "5de740e5404cced70dad920010faab3ac0afdfc62d5426e34df4e3a9d9a98e48"
     },
     {
       "path": "OpenProblemFormalizations.lean",
-      "sha256": "280040967f923cff9f80a0ba0f0471485b11102caa8ae418b44fc15fbfd5c0f0"
+      "sha256": "667ac2317d38f23e6bd2ff62cf593fe57ea55c1a794814eaa9f86c860b230a44"
     },
     {
       "path": "OpenProblemFormalizations/CohenCoherence/CofinalGraphCover.lean",
@@ -48,6 +48,10 @@
     {
       "path": "OpenProblemFormalizations/IdealWebs/CountableLevels.lean",
       "sha256": "85b305994a32eff7246e6f01741e1602c36da4f2df02434c1db826f2e3e5e3c3"
+    },
+    {
+      "path": "OpenProblemFormalizations/IdealWebs/CrossingGauge.lean",
+      "sha256": "bdaee167dfc9c90c9527c1eb15112ae84d07e26be7d9885c3b86e8ca7b6e8f83"
     },
     {
       "path": "OpenProblemFormalizations/IdealWebs/FiniteBlockSun.lean",

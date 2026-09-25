@@ -17,6 +17,9 @@ run_elab do
     `OpenProblemFormalizations.IdealWebs.selectorIdeal_eventually_mono,
     `OpenProblemFormalizations.IdealWebs.selectorIdeal_countable_lower,
     `OpenProblemFormalizations.IdealWebs.seqSun_finite_block,
+    `OpenProblemFormalizations.IdealWebs.crossingRows_completeRows,
+    `OpenProblemFormalizations.IdealWebs.crossingBounded_union,
+    `OpenProblemFormalizations.IdealWebs.completeRows_not_crossingBounded,
     `OpenProblemFormalizations.CohenCoherence.cofinal_iUnion_index,
     `OpenProblemFormalizations.CohenCoherence.countable_graph_cover_cofinal_stars]
   for name in required do
