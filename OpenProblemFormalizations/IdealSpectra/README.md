@@ -6,4 +6,6 @@ Source: Tom Benhamou, *Scales in the Point Spectrum*, arXiv:2603.00305v1, Defini
 
 `CountableBoundary.lean` proves a countable local lemma: an unbounded sequence in a directed preorder can be made increasing with every cofinal subsequence unbounded. It does not solve the general Question 3.18.
 
+`TukeyMaps.lean` proves the equivalence between the existing cofinal-subset definition and the reverse-direction unbounded-set definition, for arbitrary preorders. `RectangularClassification.lean` now proves the exact cohesive class: for two nonempty linear orders K and L without greatest elements, and any target preorder Q, Q is cohesive for the noncofinal ideal on K x L exactly when K or L Tukey reduces to Q. This classification does not require the factors to be regular cardinals. The distinct-regular-cardinal obstruction to a representative remains a separate argument, using its cofinal-fiber hypothesis.
+
 No `sorry` or extra mathematical axiom. `Audit.lean` checks the main declarations and standard Lean axiom dependencies. Lean checks do not establish novelty or the full paper statement beyond the explicitly formalized definitions.

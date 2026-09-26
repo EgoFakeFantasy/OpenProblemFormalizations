@@ -8,6 +8,9 @@ run_elab do
     `OpenProblemFormalizations.IdealSpectra.CohesiveIdeal.no_omega_omegaOne_ideal_representative,
     `OpenProblemFormalizations.IdealSpectra.CohesiveIdeal.noncofinalIdeal_union,
     `OpenProblemFormalizations.IdealSpectra.CohesiveIdeal.omegaOne_cofinal_fiber,
+    `OpenProblemFormalizations.IdealSpectra.CohesiveIdeal.tukeyLE_iff_exists_unboundedMap,
+    `OpenProblemFormalizations.IdealSpectra.CohesiveIdeal.rectangular_cohesive_iff,
+    `OpenProblemFormalizations.IdealSpectra.CohesiveIdeal.omega_omegaOne_cohesive_iff,
     `OpenProblemFormalizations.IdealSpectra.EnhancedTukeyOmega.cofinal_subsequence_unbounded,
     `OpenProblemFormalizations.IdealWebs.seqWeb_subset_level,
     `OpenProblemFormalizations.IdealWebs.seqWeb_image_of_pullback,
@@ -25,6 +28,9 @@ run_elab do
     `OpenProblemFormalizations.IdealWebs.fullRow_finiteCoordinateApprox,
     `OpenProblemFormalizations.IdealWebs.finiteCoordinateClosure_not_seqWeb,
     `OpenProblemFormalizations.IdealWebs.finiteRowFamily_seqWeb,
+    `OpenProblemFormalizations.IdealWebs.not_globalMonotone_divergent_natGauge,
+    `OpenProblemFormalizations.IdealWebs.exists_finite_divergent_rowGauge,
+    `OpenProblemFormalizations.IdealWebs.countingGauge_web_and_closure_obstruction,
     `OpenProblemFormalizations.CohenCoherence.cofinal_iUnion_index,
     `OpenProblemFormalizations.CohenCoherence.countable_graph_cover_cofinal_stars]
   for name in required do

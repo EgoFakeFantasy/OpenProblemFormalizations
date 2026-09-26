@@ -4,4 +4,5 @@ import OpenProblemFormalizations.IdealWebs.FiniteSelectors
 import OpenProblemFormalizations.IdealWebs.SelectorIdeals
 import OpenProblemFormalizations.IdealWebs.FiniteBlockSun
 import OpenProblemFormalizations.IdealWebs.CrossingGauge
+import OpenProblemFormalizations.IdealWebs.FiniteGaugeWitness
 import OpenProblemFormalizations.CohenCoherence.CofinalGraphCover

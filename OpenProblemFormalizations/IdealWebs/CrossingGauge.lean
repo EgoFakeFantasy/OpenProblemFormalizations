@@ -56,14 +56,20 @@ theorem crossingRows_completeRows (m : ℕ) (s : Set ℕ) :
 def crossingBounded (rho : Set ℕ → ℕ) (a : Set (ℕ × ℕ)) : Prop :=
   ∃ C, ∀ m, rho (crossingRows m a) ≤ C
 
+/-- Only finite row sets enter the crossing construction. Requiring global
+monotonicity of a natural-valued function on all subsets would contradict
+divergence along finite initial segments of an infinite set. -/
+def FiniteGaugeMonotone (rho : Set ℕ → ℕ) : Prop :=
+  ∀ ⦃s t : Set ℕ⦄, t.Finite → s ⊆ t → rho s ≤ rho t
+
 theorem crossingBounded_mono {rho : Set ℕ → ℕ}
-    (hrho : Monotone rho) {a b : Set (ℕ × ℕ)}
+    (hrho : FiniteGaugeMonotone rho) {a b : Set (ℕ × ℕ)}
     (hab : a ⊆ b) (hb : crossingBounded rho b) :
     crossingBounded rho a := by
   obtain ⟨C, hC⟩ := hb
   refine ⟨C, ?_⟩
   intro m
-  exact (hrho (crossingRows_mono m hab)).trans (hC m)
+  exact (hrho (crossingRows_finite m b) (crossingRows_mono m hab)).trans (hC m)
 
 theorem crossingBounded_union {rho : Set ℕ → ℕ}
     (hsub : ∀ s t : Set ℕ, rho (s ∪ t) ≤ rho s + rho t)
@@ -108,7 +114,7 @@ theorem infiniteRows_initial_subset_crossingRows (m : ℕ) (a : Set (ℕ × ℕ)
 /-- A bounded crossing set has only finitely many infinite rows whenever
 the row gauge is unbounded on each infinite set. -/
 theorem infiniteRows_finite_of_crossingBounded {rho : Set ℕ → ℕ}
-    (hrho : Monotone rho)
+    (hrho : FiniteGaugeMonotone rho)
     (hunb : ∀ s : Set ℕ, s.Infinite → ∀ C, ∃ m, C < rho (s ∩ Set.Iic m))
     {a : Set (ℕ × ℕ)} (ha : crossingBounded rho a) :
     (infiniteRows a).Finite := by
@@ -116,19 +122,19 @@ theorem infiniteRows_finite_of_crossingBounded {rho : Set ℕ → ℕ}
   have hinf' : (infiniteRows a).Infinite := hinf
   obtain ⟨C, hC⟩ := ha
   obtain ⟨m, hm⟩ := hunb (infiniteRows a) hinf' C
-  have hle := hrho (infiniteRows_initial_subset_crossingRows m a)
+  have hle := hrho (crossingRows_finite m a) (infiniteRows_initial_subset_crossingRows m a)
   exact Nat.not_lt_of_ge (hle.trans (hC m)) hm
 
 /-- One complete row of the crossing grid. -/
 def fullRow (n : ℕ) : Set (ℕ × ℕ) := completeRows {n}
 
 theorem fullRow_crossingBounded {rho : Set ℕ → ℕ}
-    (hrho : Monotone rho) (n : ℕ) :
+    (hrho : FiniteGaugeMonotone rho) (n : ℕ) :
     crossingBounded rho (fullRow n) := by
   refine ⟨rho {n}, ?_⟩
   intro m
   rw [fullRow, crossingRows_completeRows]
-  exact hrho Set.inter_subset_left
+  exact hrho (Set.finite_singleton n) Set.inter_subset_left
 
 theorem sUnion_fullRow_image (s : Set ℕ) :
     ⋃₀ (fullRow '' s) = completeRows s := by
@@ -199,7 +205,7 @@ theorem separatedRows_crossingRows_subsingleton
     omega
 
 /-- The time-separated branch of the finite-row web thinning argument. -/
-theorem separatedRows_crossingBounded {rho : Set ℕ → ℕ} (hrho : Monotone rho)
+theorem separatedRows_crossingBounded {rho : Set ℕ → ℕ} (hrho : FiniteGaugeMonotone rho)
     (C : ℕ) (hunit : ∀ n, rho {n} ≤ C)
     (a : ℕ → Set (ℕ × ℕ)) (r : ℕ → ℕ)
     (hrow : ∀ i, a i ⊆ fullRow (r i))
@@ -213,11 +219,11 @@ theorem separatedRows_crossingBounded {rho : Set ℕ → ℕ} (hrho : Monotone r
     have hsub : crossingRows m (⋃ i, a i) ⊆ {n} := by
       intro x hx
       exact Set.mem_singleton_iff.mpr (hsingle hx hn)
-    exact (hrho hsub).trans (hunit n)
+    exact (hrho (Set.finite_singleton n) hsub).trans (hunit n)
   · have hsub : crossingRows m (⋃ i, a i) ⊆ {0} := by
       intro x hx
       exact (hne ⟨x, hx⟩).elim
-    exact (hrho hsub).trans (hunit 0)
+    exact (hrho (Set.finite_singleton 0) hsub).trans (hunit 0)
 
 /-- A sequence with finite fibers eventually has an arbitrarily large row
 beyond any prescribed index. -/
@@ -279,7 +285,7 @@ theorem finiteFibers_separated_subsequence
 /-- The finite single-row family really is a sequence-web whenever singleton
 row gauges have one common bound. This is the missing web half of the crossing
 counterexample's elementary combinatorial skeleton. -/
-theorem finiteRowFamily_seqWeb {rho : Set ℕ → ℕ} (hrho : Monotone rho)
+theorem finiteRowFamily_seqWeb {rho : Set ℕ → ℕ} (hrho : FiniteGaugeMonotone rho)
     (C : ℕ) (hunit : ∀ n, rho {n} ≤ C) :
     SeqWeb {a | crossingBounded rho a} finiteRowFamily := by
   classical

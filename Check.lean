@@ -5,7 +5,27 @@ open OpenProblemFormalizations.IdealSpectra.CohesiveIdeal
 open OpenProblemFormalizations.IdealSpectra.EnhancedTukeyOmega
 open OpenProblemFormalizations.IdealWebs
 
-universe u
+universe u v w
+
+example {K : Type u} {L : Type v} {Q : Type w}
+    [LinearOrder K] [LinearOrder L] [Preorder Q]
+    [NoMaxOrder K] [NoMaxOrder L] [Nonempty K] [Nonempty L] :
+    Cohesive Q (fun a : Set (K × L) => a ∉ NoncofinalIdeal) ↔
+      TukeyLE K Q ∨ TukeyLE L Q :=
+  noncofinalIdeal_cohesive_iff
+
+example : ∃ rho : Set ℕ → ℕ,
+    FiniteGaugeMonotone rho ∧
+    (∀ s t : Set ℕ, rho (s ∪ t) ≤ rho s + rho t) ∧
+    (∀ n : ℕ, rho {n} = 1) ∧
+    (∀ s : Set ℕ, s.Infinite → ∀ C, ∃ m, C < rho (s ∩ Set.Iic m)) :=
+  exists_finite_divergent_rowGauge
+
+example :
+    SeqWeb {a | crossingBounded countingGauge a} finiteRowFamily ∧
+      ¬ SeqWeb {a | crossingBounded countingGauge a}
+        {a | FiniteCoordinateApprox finiteRowFamily a} :=
+  countingGauge_web_and_closure_obstruction
 
 example {P : Type u} [Preorder P]
     (hnat : TukeyLE P ℕ ↔
@@ -46,6 +66,12 @@ example {α : Type u} (I : Set (Set α)) (S D : ℕ → Set α)
   seqSun_diff_finite I S D hdown hunion hsun hthin hD
 
 #print axioms no_omega_omegaOne_ideal_representative
+#print axioms rectangular_cohesive_iff
+#print axioms omega_omegaOne_cohesive_iff
+#print axioms tukeyLE_iff_exists_unboundedMap
+#print axioms not_globalMonotone_divergent_natGauge
+#print axioms exists_finite_divergent_rowGauge
+#print axioms countingGauge_web_and_closure_obstruction
 #print axioms cofinal_subsequence_unbounded
 #print axioms seqWeb_subset_level
 #print axioms seqWeb_image_of_pullback

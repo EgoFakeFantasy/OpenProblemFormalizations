@@ -1,0 +1,2 @@
+*.lean text eol=lf
+verification/manifest.json text eol=lf
