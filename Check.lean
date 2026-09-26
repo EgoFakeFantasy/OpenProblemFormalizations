@@ -66,6 +66,17 @@ example {α : Type u} (I : Set (Set α)) (S D : ℕ → Set α)
   seqSun_diff_finite I S D hdown hunion hsun hthin hD
 
 #print axioms no_omega_omegaOne_ideal_representative
+example : RepresentsCohesiveClass (RectPositive (κ := ℕ) (lam := ℕ)) ℕ :=
+  left_represents_rectangular_of_tukeyLE (tukeyLE_refl ℕ)
+
+example {K L P : Type u} [LinearOrder K] [LinearOrder L] [Preorder P]
+    [NoMaxOrder K] [NoMaxOrder L] [Nonempty K] [Nonempty L]
+    (hrep : RepresentsCohesiveClass (RectPositive (κ := K) (lam := L)) P) :
+    TukeyLE K L ∨ TukeyLE L K :=
+  rectangular_representative_forces_comparable hrep
+
+#print axioms rectangular_representable_iff
+#print axioms directed_of_tukeyLE
 #print axioms rectangular_cohesive_iff
 #print axioms omega_omegaOne_cohesive_iff
 #print axioms tukeyLE_iff_exists_unboundedMap

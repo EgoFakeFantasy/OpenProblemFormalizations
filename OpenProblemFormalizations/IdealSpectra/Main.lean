@@ -1,3 +1,4 @@
 import OpenProblemFormalizations.IdealSpectra.RectangularIdeal
 import OpenProblemFormalizations.IdealSpectra.CountableBoundary
 import OpenProblemFormalizations.IdealSpectra.RectangularClassification
+import OpenProblemFormalizations.IdealSpectra.Representability

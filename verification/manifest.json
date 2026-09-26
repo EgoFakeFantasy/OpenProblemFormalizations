@@ -1,13 +1,13 @@
 {
-  "checked_at_utc": "2026-09-26T01:35:19.6797760Z",
+  "checked_at_utc": "2026-09-26T01:59:11.9005622Z",
   "lean_toolchain": "leanprover/lean4:v4.30.0",
   "mathlib_revision": "c5ea00351c28e24afc9f0f84379aa41082b1188f",
   "build": "passed",
   "statement_checks": "passed",
   "axiom_audit": "passed",
-  "declarations": 129,
-  "theorem_constants": 98,
-  "library_modules": 13,
+  "declarations": 140,
+  "theorem_constants": 108,
+  "library_modules": 14,
   "permitted_axioms": [
     "propext",
     "Classical.choice",
@@ -18,64 +18,68 @@
   "module_coverage": "passed",
   "source_hashes": [
     {
-      "sha256": "8d2b85036b5799e555f1647fa7266ff064b7b26121c9cf34f74550145c06dda8",
-      "path": "Audit.lean"
+      "path": "Audit.lean",
+      "sha256": "ecb35a07235a05ba0a749ad87e1a9bfeb12ad8f72046ab49dd79ea2a9350eb60"
     },
     {
-      "sha256": "3d093bec20a120a09f0397b1217f378b43ac2d4d96e730aaf06913231852d252",
-      "path": "Check.lean"
+      "path": "Check.lean",
+      "sha256": "18e93d27a6394ca45751ffc08642d4ec10232ba2dcf3d23f10454eac4e207f5f"
     },
     {
-      "sha256": "5d82bb6dcb31225ac04cadc338aaf096e74d4d5681f155698bf3863ef1fb8df0",
-      "path": "OpenProblemFormalizations.lean"
+      "path": "OpenProblemFormalizations.lean",
+      "sha256": "5d82bb6dcb31225ac04cadc338aaf096e74d4d5681f155698bf3863ef1fb8df0"
     },
     {
-      "sha256": "bee521324311013d74cc508f7eb80ad5e3b070edbe16d090d347d9ddb7905f23",
-      "path": "OpenProblemFormalizations/CohenCoherence/CofinalGraphCover.lean"
+      "path": "OpenProblemFormalizations/CohenCoherence/CofinalGraphCover.lean",
+      "sha256": "bee521324311013d74cc508f7eb80ad5e3b070edbe16d090d347d9ddb7905f23"
     },
     {
-      "sha256": "a3110276f55d75c865754557d0c0dea54232fcaee1c1dd2ca4ca80319ebd458b",
-      "path": "OpenProblemFormalizations/IdealSpectra/CountableBoundary.lean"
+      "path": "OpenProblemFormalizations/IdealSpectra/CountableBoundary.lean",
+      "sha256": "a3110276f55d75c865754557d0c0dea54232fcaee1c1dd2ca4ca80319ebd458b"
     },
     {
-      "sha256": "93ac25e2ef40df25471f3a6a9d468f52f46a1086973a28afa9a4133a192d5b3b",
-      "path": "OpenProblemFormalizations/IdealSpectra/Main.lean"
+      "path": "OpenProblemFormalizations/IdealSpectra/Main.lean",
+      "sha256": "ea8ac5fe1cd3de8cc3d49dbcebb15a9d30f5755e024562f93f62f182f29f5a77"
     },
     {
-      "sha256": "82019d812ba0c75d13c33ad954a009bce91334b02c0f837b5f683ea158a9c7d0",
-      "path": "OpenProblemFormalizations/IdealSpectra/RectangularClassification.lean"
+      "path": "OpenProblemFormalizations/IdealSpectra/RectangularClassification.lean",
+      "sha256": "82019d812ba0c75d13c33ad954a009bce91334b02c0f837b5f683ea158a9c7d0"
     },
     {
-      "sha256": "6b46e0381f09215bffdceec465fb204884e53a1e3a31e40af85577215a72865d",
-      "path": "OpenProblemFormalizations/IdealSpectra/RectangularIdeal.lean"
+      "path": "OpenProblemFormalizations/IdealSpectra/RectangularIdeal.lean",
+      "sha256": "6b46e0381f09215bffdceec465fb204884e53a1e3a31e40af85577215a72865d"
     },
     {
-      "sha256": "33cefae81238b68a41c5586586ab7bf322be6c099bed54e0c0b53e1a98ebc49c",
-      "path": "OpenProblemFormalizations/IdealSpectra/TukeyMaps.lean"
+      "path": "OpenProblemFormalizations/IdealSpectra/Representability.lean",
+      "sha256": "002bef626e09ed5d3f27a496e6c6715809a30619732fc0ffd9798e36337f4035"
     },
     {
-      "sha256": "33adbe2d8c3e7ce358f7b63db1cd738aa0f4b59b84c138027ac687cbea9fc061",
-      "path": "OpenProblemFormalizations/IdealWebs/CountableLevels.lean"
+      "path": "OpenProblemFormalizations/IdealSpectra/TukeyMaps.lean",
+      "sha256": "33cefae81238b68a41c5586586ab7bf322be6c099bed54e0c0b53e1a98ebc49c"
     },
     {
-      "sha256": "d849aef76c2f92b5e2f26fe552d367f28d11f39334d279ec3895c880d6982136",
-      "path": "OpenProblemFormalizations/IdealWebs/CrossingGauge.lean"
+      "path": "OpenProblemFormalizations/IdealWebs/CountableLevels.lean",
+      "sha256": "33adbe2d8c3e7ce358f7b63db1cd738aa0f4b59b84c138027ac687cbea9fc061"
     },
     {
-      "sha256": "fa8ba7c69e7664cb6ccd74d8f22cd066e3c5d3a1940f9a577665400849f0afa0",
-      "path": "OpenProblemFormalizations/IdealWebs/FiniteBlockSun.lean"
+      "path": "OpenProblemFormalizations/IdealWebs/CrossingGauge.lean",
+      "sha256": "d849aef76c2f92b5e2f26fe552d367f28d11f39334d279ec3895c880d6982136"
     },
     {
-      "sha256": "5b226e2a29b4802b377c7ea4493925a76398f179e5b9c53b9fadcb832150ece0",
-      "path": "OpenProblemFormalizations/IdealWebs/FiniteGaugeWitness.lean"
+      "path": "OpenProblemFormalizations/IdealWebs/FiniteBlockSun.lean",
+      "sha256": "fa8ba7c69e7664cb6ccd74d8f22cd066e3c5d3a1940f9a577665400849f0afa0"
     },
     {
-      "sha256": "3c27b7d1a3c78dabcdcdebbff6b5714f11c84ded5af50f259b0e2e7003cff42e",
-      "path": "OpenProblemFormalizations/IdealWebs/FiniteSelectors.lean"
+      "path": "OpenProblemFormalizations/IdealWebs/FiniteGaugeWitness.lean",
+      "sha256": "5b226e2a29b4802b377c7ea4493925a76398f179e5b9c53b9fadcb832150ece0"
     },
     {
-      "sha256": "2cda1503dc44f460f77fa15ba5ca6abb1b4343ddbdfe1f010361f3e7ec2eeab9",
-      "path": "OpenProblemFormalizations/IdealWebs/SelectorIdeals.lean"
+      "path": "OpenProblemFormalizations/IdealWebs/FiniteSelectors.lean",
+      "sha256": "3c27b7d1a3c78dabcdcdebbff6b5714f11c84ded5af50f259b0e2e7003cff42e"
+    },
+    {
+      "path": "OpenProblemFormalizations/IdealWebs/SelectorIdeals.lean",
+      "sha256": "2cda1503dc44f460f77fa15ba5ca6abb1b4343ddbdfe1f010361f3e7ec2eeab9"
     }
   ]
 }

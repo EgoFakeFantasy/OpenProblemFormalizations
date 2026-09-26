@@ -1,6 +1,6 @@
 # Verification update: September 26, 2026
 
-The local full-library build, explicit statement checks, forbidden-construct scan, module-coverage check, and axiom audit pass. The audit counts 129 project declarations and 98 theorem constants, including generated helper declarations. These are repository totals, not a count of distinct new mathematical results. The only permitted axioms are `propext`, `Classical.choice`, and `Quot.sound`.
+The local full-library build, explicit statement checks, forbidden-construct scan, module-coverage check, and axiom audit pass. The audit counts 140 project declarations and 108 theorem constants, including generated helper declarations. These are repository totals, not a count of distinct new mathematical results. The only permitted axioms are `propext`, `Classical.choice`, and `Quot.sound`.
 
 ## N02: exact classification is now kernel checked
 
@@ -14,6 +14,14 @@ The local full-library build, explicit statement checks, forbidden-construct sca
 The proof uses a bad unbounded slice for each second coordinate, then a second bad unbounded set for the slice bounds. In a linear order every unbounded set is cofinal. This produces a cofinal rectangle subset with bounded image, contradicting cohesiveness.
 
 No cardinal regularity or directedness of Q is required for this classification. The separate nonrepresentation theorem still uses a cofinal-fiber hypothesis; its concrete natural-number/omega-one instance was already checked. The new classification does not decide N04 or certify literature priority.
+
+## N02: exact representability criterion
+
+`IdealSpectra/Representability.lean` now proves that this rectangular cohesive class admits a universal representative if and only if the two factors are Tukey comparable. When K is Tukey-below L, K itself represents the class, and conversely with the roles reversed.
+
+The negative direction does not assume the proposed representative P is directed. Reductions from P to the nonempty directed factors force P to be nonempty and directed; P therefore qualifies as a test target. Its identity reduction gives cohesiveness, and the exact class theorem forces one factor below P, hence below the other factor. The implementation quantifies targets and representatives in a common universe and uses the project's cofinal-subset definition throughout.
+
+This is a structural consequence of the existing exact classification. It does not claim a new answer to N04, a new regular-cardinal fiber instantiation, or literature priority. A concrete natural-number square tests the positive direction, so the representability assertion includes nonvacuous instances.
 
 ## E05: repair of an inconsistent interface
 
