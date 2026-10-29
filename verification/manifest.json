@@ -1,12 +1,12 @@
 {
-  "checked_at_utc": "2026-09-26T01:59:11.9005622Z",
+  "checked_at_utc": "2026-10-29T01:53:00.7280688Z",
   "lean_toolchain": "leanprover/lean4:v4.30.0",
   "mathlib_revision": "c5ea00351c28e24afc9f0f84379aa41082b1188f",
   "build": "passed",
   "statement_checks": "passed",
   "axiom_audit": "passed",
-  "declarations": 140,
-  "theorem_constants": 108,
+  "declarations": 141,
+  "theorem_constants": 109,
   "library_modules": 14,
   "permitted_axioms": [
     "propext",
@@ -19,15 +19,15 @@
   "source_hashes": [
     {
       "path": "Audit.lean",
-      "sha256": "ecb35a07235a05ba0a749ad87e1a9bfeb12ad8f72046ab49dd79ea2a9350eb60"
+      "sha256": "6cf794fe2bb7fdcc7fecb2f27865ee3f3fad033ebc3c9d9eba0a432e46e26dac"
     },
     {
       "path": "Check.lean",
-      "sha256": "18e93d27a6394ca45751ffc08642d4ec10232ba2dcf3d23f10454eac4e207f5f"
+      "sha256": "66a1e191777b46058dd94953705fe9b681d3b3fd4d1945441ef8efbc32959a16"
     },
     {
       "path": "OpenProblemFormalizations.lean",
-      "sha256": "5d82bb6dcb31225ac04cadc338aaf096e74d4d5681f155698bf3863ef1fb8df0"
+      "sha256": "602a6228c7e1a20dac9fbc00a440de658d70d51ca20ec18d09469c01972c0a9b"
     },
     {
       "path": "OpenProblemFormalizations/CohenCoherence/CofinalGraphCover.lean",
@@ -35,11 +35,11 @@
     },
     {
       "path": "OpenProblemFormalizations/IdealSpectra/CountableBoundary.lean",
-      "sha256": "a3110276f55d75c865754557d0c0dea54232fcaee1c1dd2ca4ca80319ebd458b"
+      "sha256": "98a8f130eec2ab431b6d87265f697b5f1fcffadfb3a4f3d6804288d35f1eea25"
     },
     {
       "path": "OpenProblemFormalizations/IdealSpectra/Main.lean",
-      "sha256": "ea8ac5fe1cd3de8cc3d49dbcebb15a9d30f5755e024562f93f62f182f29f5a77"
+      "sha256": "319677607f1dadcc25e466a660f024e557ca7e8fb163df5c57d64e066795bffc"
     },
     {
       "path": "OpenProblemFormalizations/IdealSpectra/RectangularClassification.lean",
@@ -47,11 +47,11 @@
     },
     {
       "path": "OpenProblemFormalizations/IdealSpectra/RectangularIdeal.lean",
-      "sha256": "6b46e0381f09215bffdceec465fb204884e53a1e3a31e40af85577215a72865d"
+      "sha256": "baacdc7287875fd6970dfbbc4d3aabf62495fdcb9a18b30fb3fa9ffc24867d60"
     },
     {
       "path": "OpenProblemFormalizations/IdealSpectra/Representability.lean",
-      "sha256": "002bef626e09ed5d3f27a496e6c6715809a30619732fc0ffd9798e36337f4035"
+      "sha256": "5669611b72af4217acb457145e6c4cc19912841bfd43bd3b58db357d9b84ff42"
     },
     {
       "path": "OpenProblemFormalizations/IdealSpectra/TukeyMaps.lean",
@@ -63,7 +63,7 @@
     },
     {
       "path": "OpenProblemFormalizations/IdealWebs/CrossingGauge.lean",
-      "sha256": "d849aef76c2f92b5e2f26fe552d367f28d11f39334d279ec3895c880d6982136"
+      "sha256": "6f56067341db8cca4f75af35218d2bd901469ea13faaa01521b5d40a217fb28f"
     },
     {
       "path": "OpenProblemFormalizations/IdealWebs/FiniteBlockSun.lean",
@@ -71,7 +71,7 @@
     },
     {
       "path": "OpenProblemFormalizations/IdealWebs/FiniteGaugeWitness.lean",
-      "sha256": "5b226e2a29b4802b377c7ea4493925a76398f179e5b9c53b9fadcb832150ece0"
+      "sha256": "873cf17914449829841719018f652678a7834f9b6cd04bf7ed2804609db09a6a"
     },
     {
       "path": "OpenProblemFormalizations/IdealWebs/FiniteSelectors.lean",

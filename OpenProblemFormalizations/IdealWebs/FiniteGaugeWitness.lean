@@ -28,17 +28,21 @@ theorem not_globalMonotone_divergent_natGauge {rho : Set ℕ → ℕ}
 /-- Finite cardinality, with the mathlib value zero on infinite sets. -/
 noncomputable def countingGauge (s : Set ℕ) : ℕ := s.ncard
 
+/-- `countingGauge` is monotone when the larger set is finite. -/
 theorem countingGauge_finiteMonotone : FiniteGaugeMonotone countingGauge := by
   intro s t ht hst
   exact Set.ncard_le_ncard hst ht
 
+/-- `countingGauge` is subadditive. -/
 theorem countingGauge_subadditive (s t : Set ℕ) :
     countingGauge (s ∪ t) ≤ countingGauge s + countingGauge t :=
   Set.ncard_union_le s t
 
+/-- `countingGauge` gives every singleton the value `1`. -/
 theorem countingGauge_singleton (n : ℕ) : countingGauge {n} = 1 := by
   simp [countingGauge]
 
+/-- On an infinite set, `countingGauge` of the initial segments is unbounded. -/
 theorem countingGauge_initial_divergence (s : Set ℕ) (hs : s.Infinite) (C : ℕ) :
     ∃ m, C < countingGauge (s ∩ Set.Iic m) := by
   classical

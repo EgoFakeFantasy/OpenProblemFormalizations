@@ -16,12 +16,18 @@ open Set
 
 universe u v w
 
+/-- `f` sends every cofinal subset of `α` to a cofinal subset of `β`. This is the paper's cofinal-
+subset convention; `β` need not be directed. -/
 def CofinalMap {α : Type u} {β : Type v} [LE α] [LE β] (f : α → β) : Prop :=
   ∀ s : Set α, IsCofinal s → IsCofinal (f '' s)
 
+/-- `P` is Tukey below `Q`: some map `Q → P` sends cofinal sets to cofinal sets. -/
 def TukeyLE (P : Type u) (Q : Type v) [LE P] [LE Q] : Prop :=
   ∃ f : Q → P, CofinalMap f
 
+/-- If `P` is Tukey below both `κ` and `lam`, and every map `lam → κ` has a cofinal fibre, then `P`
+has a greatest element. Each `v l` is covered by some `u k`; on a cofinal fibre of this choice of
+`k`, `u k` bounds a cofinal set, hence everything. -/
 theorem top_of_two_tukey_bounds
     {P : Type u} {κ : Type v} {lam : Type w}
     [Preorder P] [Preorder κ] [Preorder lam]
@@ -44,12 +50,16 @@ theorem top_of_two_tukey_bounds
   have hvl : v l ≤ u (chooseIndex l) := Classical.choose_spec (hcover l)
   exact hpq.trans (hl ▸ hvl)
 
+/-- `Q` is cohesive for `positive`: some map `X → Q` sends every positive set to an unbounded set.
+-/
 def Cohesive {X : Type u} (Q : Type v) [LE Q] (positive : Set X → Prop) : Prop :=
   ∃ f : X → Q, ∀ a : Set X, positive a → ¬ BddAbove (f '' a)
 
+/-- The positive sets of the rectangular ideal on `κ × lam`: the cofinal sets. -/
 def RectPositive {κ : Type u} {lam : Type v} [LE κ] [LE lam]
     (a : Set (κ × lam)) : Prop := IsCofinal a
 
+/-- The first factor is cohesive for the rectangular ideal, witnessed by the projection. -/
 theorem fst_cohesive {κ : Type u} {lam : Type v}
     [Preorder κ] [Preorder lam] [NoMaxOrder κ] [Nonempty lam] :
     Cohesive κ (RectPositive (κ := κ) (lam := lam)) := by
@@ -64,6 +74,7 @@ theorem fst_cohesive {κ : Type u} {lam : Type v}
   obtain ⟨c, hc, hkc⟩ := hcof k
   exact (not_le_of_gt hbk) (hkc.trans (hb hc))
 
+/-- The second factor is cohesive for the rectangular ideal, witnessed by the projection. -/
 theorem snd_cohesive {κ : Type u} {lam : Type v}
     [Preorder κ] [Preorder lam] [NoMaxOrder lam] [Nonempty κ] :
     Cohesive lam (RectPositive (κ := κ) (lam := lam)) := by
@@ -78,6 +89,8 @@ theorem snd_cohesive {κ : Type u} {lam : Type v}
   obtain ⟨c, hc, hlc⟩ := hcof l
   exact (not_le_of_gt hbl) (hlc.trans (hb hc))
 
+/-- The one-point order is never cohesive for the cofinal sets, since every image in it is bounded.
+-/
 theorem unit_not_cohesive {X : Type u} [Preorder X] :
     ¬ Cohesive PUnit.{1} (fun a : Set X => IsCofinal a) := by
   rintro ⟨f, hf⟩
@@ -87,6 +100,9 @@ theorem unit_not_cohesive {X : Type u} [Preorder X] :
   rintro q ⟨x, -, rfl⟩
   trivial
 
+/-- No preorder represents the rectangular cohesive class when every map `lam → κ` has a cofinal
+fibre. A representative would be Tukey below both factors, so it would have a greatest element; it
+would then also be Tukey below `PUnit`, which is not cohesive. -/
 theorem no_representative
     {P : Type u} {κ : Type v} {lam : Type w}
     [Preorder P] [Preorder κ] [Preorder lam]
@@ -110,6 +126,7 @@ end CohesiveIdeal
 
 namespace CohesiveIdeal
 
+/-- The first uncountable ordinal `ω₁`, as the ordinals below `ω_1`. -/
 abbrev OmegaOne : Type 1 := Set.Iio (Ordinal.omega (1 : Ordinal.{0}))
 
 instance : Nonempty OmegaOne := ⟨⟨0, Ordinal.omega_pos 1⟩⟩
@@ -138,6 +155,7 @@ theorem omegaOne_cofinal_fiber (f : OmegaOne → ℕ) :
     exact Ordinal.le_iSup (fun n : ℕ => (b n : Ordinal)) (f x)
   exact (not_lt_of_ge hle) hlt
 
+/-- `no_representative` for `ℕ × ω₁`. -/
 theorem no_omega_omegaOne_representative
     {P : Type u} [Preorder P]
     (hnat : TukeyLE P ℕ ↔
@@ -155,6 +173,7 @@ def NoncofinalIdeal {κ : Type u} {lam : Type v}
     [LE κ] [LE lam] : Set (Set (κ × lam)) :=
   {a | ¬ IsCofinal a}
 
+/-- The non-cofinal sets are closed under subsets. -/
 theorem noncofinalIdeal_downward
     {κ : Type u} {lam : Type v} [LE κ] [LE lam]
     {a b : Set (κ × lam)}
@@ -163,6 +182,8 @@ theorem noncofinalIdeal_downward
   intro ha
   exact hb (ha.mono hab)
 
+/-- For linear factors, the non-cofinal sets are closed under binary unions: take the coordinatewise
+maximum of the two witnesses. -/
 theorem noncofinalIdeal_union
     {κ : Type u} {lam : Type v}
     [LinearOrder κ] [LinearOrder lam]
@@ -182,7 +203,7 @@ theorem noncofinalIdeal_union
   · exact hra x hx ((show ra ≤ r from ⟨le_max_left _ _, le_max_left _ _⟩).trans hrx)
   · exact hrb x hx ((show rb ≤ r from ⟨le_max_right _ _, le_max_right _ _⟩).trans hrx)
 
-
+/-- The ideal on `ℕ × ω₁` contains the empty set. -/
 theorem noncofinalIdeal_empty :
     (∅ : Set (ℕ × OmegaOne)) ∈ NoncofinalIdeal := by
   change ¬ IsCofinal (∅ : Set (ℕ × OmegaOne))
@@ -190,6 +211,7 @@ theorem noncofinalIdeal_empty :
   obtain ⟨x, hx, _⟩ := h (0, Classical.choice inferInstance)
   exact hx
 
+/-- The ideal on `ℕ × ω₁` contains every singleton. -/
 theorem noncofinalIdeal_singleton (x : ℕ × OmegaOne) :
     ({x} : Set (ℕ × OmegaOne)) ∈ NoncofinalIdeal := by
   change ¬ IsCofinal ({x} : Set (ℕ × OmegaOne))
@@ -199,6 +221,7 @@ theorem noncofinalIdeal_singleton (x : ℕ × OmegaOne) :
   subst y
   exact Nat.not_succ_le_self x.1 hxy.1
 
+/-- The ideal on `ℕ × ω₁` is proper. -/
 theorem noncofinalIdeal_proper :
     (Set.univ : Set (ℕ × OmegaOne)) ∉ NoncofinalIdeal := by
   change ¬ ¬ IsCofinal (Set.univ : Set (ℕ × OmegaOne))
@@ -207,6 +230,7 @@ theorem noncofinalIdeal_proper :
   intro x
   exact ⟨x, Set.mem_univ x, le_rfl⟩
 
+/-- The ideal on `ℕ × ω₁` covers the whole space. -/
 theorem noncofinalIdeal_space :
     ⋃₀ (NoncofinalIdeal (κ := ℕ) (lam := OmegaOne)) = (Set.univ : Set (ℕ × OmegaOne)) := by
   ext x
@@ -216,10 +240,12 @@ theorem noncofinalIdeal_space :
   · intro _
     exact ⟨{x}, noncofinalIdeal_singleton x, by simp⟩
 
+/-- The positive sets are exactly the sets outside the ideal. -/
 theorem rectPositive_iff_not_small (a : Set (ℕ × OmegaOne)) :
     RectPositive a ↔ a ∉ NoncofinalIdeal := by
   simp [RectPositive, NoncofinalIdeal]
 
+/-- `no_omega_omegaOne_representative`, with positivity stated through `NoncofinalIdeal`. -/
 theorem no_omega_omegaOne_ideal_representative
     {P : Type u} [Preorder P]
     (hnat : TukeyLE P ℕ ↔
@@ -235,6 +261,5 @@ theorem no_omega_omegaOne_ideal_representative
   · simpa [Cohesive, RectPositive, NoncofinalIdeal] using hunit
 
 end CohesiveIdeal
-
 
 end OpenProblemFormalizations.IdealSpectra

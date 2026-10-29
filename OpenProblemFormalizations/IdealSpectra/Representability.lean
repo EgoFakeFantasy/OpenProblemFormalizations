@@ -16,11 +16,13 @@ open Set
 
 universe u v w
 
+/-- Tukey reducibility is reflexive. -/
 theorem tukeyLE_refl (P : Type u) [Preorder P] : TukeyLE P P := by
   refine ⟨id, ?_⟩
   intro a ha
   simpa using ha
 
+/-- Tukey reducibility is transitive. -/
 theorem tukeyLE_trans
     {P : Type u} {Q : Type v} {R : Type w}
     [Preorder P] [Preorder Q] [Preorder R]
@@ -31,12 +33,15 @@ theorem tukeyLE_trans
   intro a ha
   simpa only [Set.image_image] using hf (g '' a) (hg a ha)
 
+/-- A preorder Tukey below a nonempty one is nonempty. -/
 theorem nonempty_of_tukeyLE
     {P : Type u} {Q : Type v} [Preorder P] [Preorder Q] [Nonempty Q]
     (h : TukeyLE P Q) : Nonempty P := by
   obtain ⟨f, _⟩ := h
   exact ⟨f (Classical.choice inferInstance)⟩
 
+/-- A preorder Tukey below a directed one is directed: an unbounded pair would map to an unbounded
+pair. -/
 theorem directed_of_tukeyLE
     {P : Type u} {Q : Type v} [Preorder P] [Preorder Q]
     (h : TukeyLE P Q)
@@ -57,6 +62,11 @@ theorem directed_of_tukeyLE
   · exact haq
   · exact hbq
 
+/-- Every linear order is directed. -/
+private theorem directed_of_linearOrder (K : Type u) [LinearOrder K] :
+    ∀ a b : K, ∃ c : K, a ≤ c ∧ b ≤ c :=
+  fun a b => ⟨max a b, le_max_left _ _, le_max_right _ _⟩
+
 /-- Universality is tested on nonempty directed preorders in the representative's universe.
 The proposed representative itself is allowed to be an arbitrary preorder. -/
 def RepresentsCohesiveClass {X : Type u} (positive : Set X → Prop)
@@ -65,25 +75,27 @@ def RepresentsCohesiveClass {X : Type u} (positive : Set X → Prop)
     (∀ a b : Q, ∃ c : Q, a ≤ c ∧ b ≤ c) →
     (TukeyLE P Q ↔ Cohesive Q positive)
 
+/-- A representative of the rectangular class forces the two factors to be Tukey comparable. It lies
+Tukey below both factors, so it is nonempty and directed and may be tested against itself. -/
 theorem rectangular_representative_forces_comparable
     {K L P : Type u} [LinearOrder K] [LinearOrder L] [Preorder P]
     [NoMaxOrder K] [NoMaxOrder L] [Nonempty K] [Nonempty L]
     (hrep : RepresentsCohesiveClass (RectPositive (κ := K) (lam := L)) P) :
     TukeyLE K L ∨ TukeyLE L K := by
-  have hK : TukeyLE P K :=
-    (hrep K inferInstance (fun a b => ⟨max a b, le_max_left _ _, le_max_right _ _⟩)).mpr
-      fst_cohesive
-  have hL : TukeyLE P L :=
-    (hrep L inferInstance (fun a b => ⟨max a b, le_max_left _ _, le_max_right _ _⟩)).mpr
-      snd_cohesive
+  -- Both factors are cohesive, so the representative lies Tukey below each of them.
+  have hK : TukeyLE P K := (hrep K inferInstance (directed_of_linearOrder _)).mpr fst_cohesive
+  have hL : TukeyLE P L := (hrep L inferInstance (directed_of_linearOrder _)).mpr snd_cohesive
+  -- Hence `P` is a legitimate test target, and testing it against itself shows it is cohesive.
   have hnP : Nonempty P := nonempty_of_tukeyLE hK
   have hdP : ∀ a b : P, ∃ c : P, a ≤ c ∧ b ≤ c :=
-    directed_of_tukeyLE hK (fun a b => ⟨max a b, le_max_left _ _, le_max_right _ _⟩)
+    directed_of_tukeyLE hK (directed_of_linearOrder _)
   have hcP := (hrep P hnP hdP).mp (tukeyLE_refl P)
+  -- The exact classification puts one factor below `P`, hence below the other factor.
   rcases rectangular_cohesive_iff.mp hcP with hKP | hLP
   · exact Or.inl (tukeyLE_trans hKP hL)
   · exact Or.inr (tukeyLE_trans hLP hK)
 
+/-- If `K` is Tukey below `L`, then `K` represents the rectangular class. -/
 theorem left_represents_rectangular_of_tukeyLE
     {K L : Type u} [LinearOrder K] [LinearOrder L]
     [NoMaxOrder K] [NoMaxOrder L] [Nonempty K] [Nonempty L]
@@ -97,6 +109,7 @@ theorem left_represents_rectangular_of_tukeyLE
     · exact hK
     · exact tukeyLE_trans hKL hL
 
+/-- If `L` is Tukey below `K`, then `L` represents the rectangular class. -/
 theorem right_represents_rectangular_of_tukeyLE
     {K L : Type u} [LinearOrder K] [LinearOrder L]
     [NoMaxOrder K] [NoMaxOrder L] [Nonempty K] [Nonempty L]
@@ -110,6 +123,8 @@ theorem right_represents_rectangular_of_tukeyLE
     · exact tukeyLE_trans hLK hK
     · exact hL
 
+/-- The rectangular cohesive class has a representative exactly when the factors are Tukey
+comparable. -/
 theorem rectangular_representable_iff
     {K L : Type u} [LinearOrder K] [LinearOrder L]
     [NoMaxOrder K] [NoMaxOrder L] [Nonempty K] [Nonempty L] :

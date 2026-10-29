@@ -6,3 +6,5 @@ import OpenProblemFormalizations.IdealWebs.FiniteBlockSun
 import OpenProblemFormalizations.IdealWebs.CrossingGauge
 import OpenProblemFormalizations.IdealWebs.FiniteGaugeWitness
 import OpenProblemFormalizations.CohenCoherence.CofinalGraphCover
+
+/-! Umbrella import for all open-problem formalization projects. -/

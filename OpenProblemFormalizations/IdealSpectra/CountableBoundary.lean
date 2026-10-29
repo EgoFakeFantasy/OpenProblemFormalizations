@@ -11,16 +11,19 @@ open Set
 
 universe u
 
+/-- An increasing sequence lying above `s` termwise, built by choosing upper bounds. -/
 private noncomputable def increasingHull {P : Type u} [Preorder P]
     (s : ℕ → P) (hdir : ∀ p q : P, ∃ r : P, p ≤ r ∧ q ≤ r) : ℕ → P
   | 0 => s 0
   | n + 1 => Classical.choose (hdir (increasingHull s hdir n) (s (n + 1)))
 
+/-- `increasingHull` increases at each step. -/
 private theorem hull_step {P : Type u} [Preorder P]
     (s : ℕ → P) (hdir : ∀ p q : P, ∃ r : P, p ≤ r ∧ q ≤ r) (n : ℕ) :
     increasingHull s hdir n ≤ increasingHull s hdir (n + 1) := by
   exact (Classical.choose_spec (hdir (increasingHull s hdir n) (s (n + 1)))).1
 
+/-- `increasingHull` lies above the original sequence. -/
 private theorem source_le_hull {P : Type u} [Preorder P]
     (s : ℕ → P) (hdir : ∀ p q : P, ∃ r : P, p ≤ r ∧ q ≤ r) (n : ℕ) :
     s n ≤ increasingHull s hdir n := by
