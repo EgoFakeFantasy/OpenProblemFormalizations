@@ -1,5 +1,8 @@
 import OpenProblemFormalizations
 
+/-! Statement checks: restates the main results as `example`s with explicit hypotheses, so their
+exact form is visible in one place. -/
+
 namespace OpenProblemAcceptance
 open OpenProblemFormalizations.IdealSpectra.CohesiveIdeal
 open OpenProblemFormalizations.IdealSpectra.EnhancedTukeyOmega

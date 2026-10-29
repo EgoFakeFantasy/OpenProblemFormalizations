@@ -1,6 +1,9 @@
 import OpenProblemFormalizations
 import Lean
 
+/-! Axiom audit: checks that the listed main results exist and that every project declaration
+depends only on `propext`, `Classical.choice` and `Quot.sound`. -/
+
 open Lean Elab Command in
 run_elab do
   let env ← getEnv

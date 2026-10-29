@@ -17,11 +17,13 @@ open Set
 def crossingRows (m : ℕ) (a : Set (ℕ × ℕ)) : Set ℕ :=
   {n | n ≤ m ∧ ∃ t, m ≤ t ∧ (n, t) ∈ a}
 
+/-- Active rows are monotone in the set. -/
 theorem crossingRows_mono (m : ℕ) {a b : Set (ℕ × ℕ)}
     (hab : a ⊆ b) : crossingRows m a ⊆ crossingRows m b := by
   rintro n ⟨hn, t, hmt, hta⟩
   exact ⟨hn, t, hmt, hab hta⟩
 
+/-- Active rows of a union are the union of the active rows. -/
 theorem crossingRows_union (m : ℕ) (a b : Set (ℕ × ℕ)) :
     crossingRows m (a ∪ b) = crossingRows m a ∪ crossingRows m b := by
   ext n
@@ -34,6 +36,7 @@ theorem crossingRows_union (m : ℕ) (a b : Set (ℕ × ℕ)) :
     · exact ⟨hn, t, hmt, Or.inl hta⟩
     · exact ⟨hn, t, hmt, Or.inr htb⟩
 
+/-- Only finitely many rows are active at any time. -/
 theorem crossingRows_finite (m : ℕ) (a : Set (ℕ × ℕ)) :
     (crossingRows m a).Finite := by
   exact (finite_le_nat m).subset (fun n hn => hn.1)
@@ -42,6 +45,7 @@ theorem crossingRows_finite (m : ℕ) (a : Set (ℕ × ℕ)) :
 def completeRows (s : Set ℕ) : Set (ℕ × ℕ) :=
   {p | p.1 ∈ s}
 
+/-- The active rows of `completeRows s` at time `m` are the indices in `s` up to `m`. -/
 theorem crossingRows_completeRows (m : ℕ) (s : Set ℕ) :
     crossingRows m (completeRows s) = s ∩ Set.Iic m := by
   ext n
@@ -62,6 +66,7 @@ divergence along finite initial segments of an infinite set. -/
 def FiniteGaugeMonotone (rho : Set ℕ → ℕ) : Prop :=
   ∀ ⦃s t : Set ℕ⦄, t.Finite → s ⊆ t → rho s ≤ rho t
 
+/-- For a finitely monotone gauge, crossing-bounded sets are closed under subsets. -/
 theorem crossingBounded_mono {rho : Set ℕ → ℕ}
     (hrho : FiniteGaugeMonotone rho) {a b : Set (ℕ × ℕ)}
     (hab : a ⊆ b) (hb : crossingBounded rho b) :
@@ -71,6 +76,7 @@ theorem crossingBounded_mono {rho : Set ℕ → ℕ}
   intro m
   exact (hrho (crossingRows_finite m b) (crossingRows_mono m hab)).trans (hC m)
 
+/-- For a subadditive gauge, crossing-bounded sets are closed under binary unions. -/
 theorem crossingBounded_union {rho : Set ℕ → ℕ}
     (hsub : ∀ s t : Set ℕ, rho (s ∪ t) ≤ rho s + rho t)
     {a b : Set (ℕ × ℕ)} (ha : crossingBounded rho a)
@@ -128,6 +134,7 @@ theorem infiniteRows_finite_of_crossingBounded {rho : Set ℕ → ℕ}
 /-- One complete row of the crossing grid. -/
 def fullRow (n : ℕ) : Set (ℕ × ℕ) := completeRows {n}
 
+/-- For a finitely monotone gauge, a single complete row is crossing bounded. -/
 theorem fullRow_crossingBounded {rho : Set ℕ → ℕ}
     (hrho : FiniteGaugeMonotone rho) (n : ℕ) :
     crossingBounded rho (fullRow n) := by
@@ -136,6 +143,7 @@ theorem fullRow_crossingBounded {rho : Set ℕ → ℕ}
   rw [fullRow, crossingRows_completeRows]
   exact hrho (Set.finite_singleton n) Set.inter_subset_left
 
+/-- The union of the complete rows indexed by `s` is `completeRows s`. -/
 theorem sUnion_fullRow_image (s : Set ℕ) :
     ⋃₀ (fullRow '' s) = completeRows s := by
   ext p
@@ -159,6 +167,7 @@ def FiniteCoordinateApprox {α : Type*} (w : Set (Set α)) (a : Set α) : Prop :
 def finiteRowFamily : Set (Set (ℕ × ℕ)) :=
   {a | a.Finite ∧ ∃ n, a ⊆ fullRow n}
 
+/-- Each complete row is a finite-coordinate limit of finite single-row sets. -/
 theorem fullRow_finiteCoordinateApprox (n : ℕ) :
     FiniteCoordinateApprox finiteRowFamily (fullRow n) := by
   intro f
@@ -169,6 +178,8 @@ theorem fullRow_finiteCoordinateApprox (n : ℕ) :
   · intro x hx
     simp [hx]
 
+/-- For a gauge diverging on every infinite set of rows, the finite-coordinate closure of the
+finite single-row sets is not a sequence-web: the complete rows form a sun inside it. -/
 theorem finiteCoordinateClosure_not_seqWeb {rho : Set ℕ → ℕ}
     (hunb : ∀ s : Set ℕ, s.Infinite → ∀ C, ∃ m, C < rho (s ∩ Set.Iic m)) :
     ¬ SeqWeb {a | crossingBounded rho a}
@@ -242,6 +253,7 @@ theorem finiteFibers_exists_later_row (r : ℕ → ℕ)
     exact h ⟨i, by omega, hgt⟩
   exact (Set.Ici_infinite (k + 1)) (hsmall.subset hsub)
 
+/-- A finite subset of `ℕ × ℕ` has bounded second coordinates. -/
 theorem finiteSet_second_bounded (a : Set (ℕ × ℕ)) (ha : a.Finite) :
     ∃ B : ℕ, ∀ p ∈ a, p.2 ≤ B := by
   classical
